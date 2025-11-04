@@ -1,0 +1,62 @@
+{
+  "name": "@andresaya/n8n-nodes-edgetts",
+  "version": "1.0.0",
+  "description": "n8n node for Edge TTS - Text-to-Speech using Microsoft Edge capabilities",
+  "keywords": [
+    "n8n-community-node-package",
+    "tts",
+    "text-to-speech",
+    "edge-tts",
+    "microsoft",
+    "speech-synthesis"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/andresayac/n8n-nodes-edgetts#readme",
+  "author": {
+    "name": "Andres Aya",
+    "email": "andresaya@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andresayac/n8n-nodes-edgetts.git"
+  },
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes --write",
+    "lint": "eslint nodes package.json",
+    "lintfix": "eslint nodes package.json --fix",
+    "prepublishOnly": "pnpm build && pnpm lint -c .eslintrc.prepublish.js nodes package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/nodes/EdgeTTS/EdgeTts.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-n8n-nodes-base": "^1.16.3",
+    "gulp": "^5.0.0",
+    "n8n-workflow": "^1.70.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "@andresaya/edge-tts": "^1.0.0"
+  }
+}
