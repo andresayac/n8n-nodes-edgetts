@@ -3,8 +3,8 @@ import { EdgeTTS } from '@andresaya/edge-tts';
 
 export async function textToSpeech(this: IExecuteFunctions, itemIndex: number) {
 	const inputText = this.getNodeParameter('inputText', itemIndex) as string;
-	const voice = this.getNodeParameter('voice', itemIndex) as string;
 	const inputType = this.getNodeParameter('inputType', itemIndex, 'auto') as string;
+	const voice = this.getNodeParameter('voice', itemIndex, '') as string;
 	const additionalOptions = this.getNodeParameter('additionalOptions', itemIndex, {}) as IDataObject;
 
 	// Extraer opciones adicionales
@@ -18,8 +18,9 @@ export async function textToSpeech(this: IExecuteFunctions, itemIndex: number) {
 		throw new NodeOperationError(this.getNode(), 'Input text is required');
 	}
 
-	if (!voice) {
-		throw new NodeOperationError(this.getNode(), 'Voice is required');
+	// Voice is required only for non-SSML input
+	if (inputType !== 'ssml' && !voice) {
+		throw new NodeOperationError(this.getNode(), 'Voice is required for text input');
 	}
 
 	try {
@@ -36,7 +37,9 @@ export async function textToSpeech(this: IExecuteFunctions, itemIndex: number) {
 
 		// Sintetizar el audio - esto ya procesa todo
 		const synthesizeStart = Date.now();
-		await tts.synthesize(inputText, voice, synthesizeOptions);
+		// For SSML, voice can be empty as it's specified in the SSML itself
+		const voiceToUse = voice || 'en-US-AriaNeural';
+		await tts.synthesize(inputText, voiceToUse, synthesizeOptions);
 		const synthesizeTime = Date.now() - synthesizeStart;
 
 		// Obtener directamente el base64 (ya está procesado)
@@ -47,7 +50,7 @@ export async function textToSpeech(this: IExecuteFunctions, itemIndex: number) {
 		// Preparar la respuesta base
 		const response: IDataObject = {
 			success: true,
-			voice,
+			voice: voice || 'SSML',
 			audio: audioBase64,
 			performance: {
 				synthesizeMs: synthesizeTime,

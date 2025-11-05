@@ -1,6 +1,6 @@
-﻿{
+{
   "name": "@andresaya/n8n-nodes-edgetts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "n8n node for Edge TTS - Text-to-Speech using Microsoft Edge capabilities",
   "keywords": [
     "n8n-community-node-package",

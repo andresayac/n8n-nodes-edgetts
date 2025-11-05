@@ -57,6 +57,7 @@ export const synthesizeFields: INodeProperties[] = [
 			show: {
 				resource: ['synthesize'],
 				operation: ['textToSpeech'],
+				inputType: ['auto', 'text'],
 			},
 		},
 		default: 'en-US-AriaNeural',
@@ -95,6 +96,11 @@ export const synthesizeFields: INodeProperties[] = [
 				displayName: 'Pitch',
 				name: 'pitch',
 				type: 'string',
+				displayOptions: {
+					show: {
+						'/inputType': ['auto', 'text'],
+					},
+				},
 				default: '0Hz',
 				description: 'Voice pitch adjustment. Range: -100Hz to +100Hz. Examples: "+10Hz", "-20Hz", "0Hz"',
 				placeholder: '+10Hz',
@@ -103,6 +109,11 @@ export const synthesizeFields: INodeProperties[] = [
 				displayName: 'Rate',
 				name: 'rate',
 				type: 'string',
+				displayOptions: {
+					show: {
+						'/inputType': ['auto', 'text'],
+					},
+				},
 				default: '0%',
 				description: 'Speech rate adjustment. Range: -100% to +200%. Examples: "+50%", "-10%", "0%"',
 				placeholder: '+0%',
@@ -111,6 +122,11 @@ export const synthesizeFields: INodeProperties[] = [
 				displayName: 'Volume',
 				name: 'volume',
 				type: 'string',
+				displayOptions: {
+					show: {
+						'/inputType': ['auto', 'text'],
+					},
+				},
 				default: '0%',
 				description: 'Volume adjustment. Range: -100% to +100%. Examples: "+90%", "-10%", "0%"',
 				placeholder: '+0%',
